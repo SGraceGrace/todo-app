@@ -1,0 +1,86 @@
+<div class="container">
+    <div class="card">
+        <div class="image"></div>
+        <div class="content">
+            <h1>Welcome to our Todo List app!!!</h1>
+            <h2>Explore our website’s powerful Todo features.
+                Your productivity journey begins here! 💪</h2>
+            <form class="example-form" [formGroup]="signupform" (ngSubmit)="onSignup()">
+
+                <mat-form-field class="example-full-width">
+                    <mat-label class="label">First Name</mat-label>
+                    <input type="text" matInput formControlName="fname" placeholder="Ex. Grace">
+                    <mat-error class="label" *ngIf="signupform.get('fname')?.hasError('required')">
+                        First name is required
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="example-full-width">
+                    <mat-label class="label">Last Name</mat-label>
+                    <input type="text" matInput formControlName="lname" placeholder="Ex. Sadhasivam">
+                    <mat-error class="label" *ngIf="signupform.get('lname')?.hasError('required')">
+                        Last name is required
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="example-full-width">
+                    <mat-label class="label">Email</mat-label>
+                    <input type="email" matInput formControlName="email" placeholder="Ex. pat@example.com">
+                    <mat-error class="label" *ngIf="signupform.get('email')?.hasError('email') && !signupform.get('email')?.hasError('required')">
+                        Please enter a valid email address
+                    </mat-error>
+                    <mat-error class="label" *ngIf="signupform.get('email')?.hasError('required')">
+                        Email is required
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="example-full-width">
+                    <mat-label class="label">Phone no</mat-label>
+                    <input type="text" matInput formControlName="pno" placeholder="Ex. 987654321">
+                    <mat-error class="label" *ngIf="signupform.get('pno')?.hasError('required')">
+                        Phone number is required
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="example-full-width">
+                    <mat-label class="label">Enter your password</mat-label>
+                    <input matInput [type]="hide1 ? 'password' : 'text'" formControlName="password" (input)="enablePassword()">
+                    <button type="button" mat-icon-button matSuffix (click)="hide1 = !hide1" [attr.aria-label]="'Hide password'"
+                        [attr.aria-pressed]="hide1">
+                        <mat-icon>{{hide1 ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                    <mat-error class="label" *ngIf="signupform.get('password')?.hasError('required')">
+                        Password is required
+                    </mat-error>
+                    <mat-error class="label" *ngIf="signupform.get('password')?.errors?.['pattern']">
+                        Password should have 1 uppercase, 1 lowercase, 1 number, minimum 8 characters and maximum 20
+                        characters
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="example-full-width">
+                    <mat-label class="label">Confirm password</mat-label>
+                    <input matInput [type]="hide2 ? 'password' : 'text'" formControlName="cpassword" (input)="passwordCheck()">
+                    <button type="button" mat-icon-button matSuffix (click)="hide2 = !hide2" [attr.aria-label]="'Hide password'"
+                        [attr.aria-pressed]="hide2">
+                        <mat-icon>{{hide2 ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                    <mat-error class="label" *ngIf="signupform.get('cpassword')?.hasError('required')">
+                        Password is required
+                    </mat-error>
+                    <mat-error class="label" *ngIf="signupform.controls['cpassword']?.errors?.['mismatch']">
+                        Password did not match 
+                    </mat-error>
+                </mat-form-field>
+
+                <div class="button">
+                    <button type="submit" [disabled]="signupform.invalid" mat-raised-button>SIGN UP</button>
+                </div>
+            </form>
+            <div class="user">
+                <p>Already a user? </p>
+                <a routerLink="/login">Login</a>
+            </div>
+        </div>
+    </div>
+</div>
