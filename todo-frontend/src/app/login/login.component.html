@@ -4,35 +4,42 @@
         <div class="content">
             <h1>Welcome back!!!</h1>
             <h2>Missed our Todo app? Let’s pick up where you left off. Your tasks await!</h2>
-            <form class="example-form">
+            <form class="example-form" [formGroup]="loginform" (ngSubmit)=onLogin()>
                 <mat-form-field class="example-full-width">
                     <mat-label class="label">Email</mat-label>
-                    <input type="email" matInput [formControl]="emailFormControl" placeholder="Ex. pat@example.com">
-                    <mat-error class="label" *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+                    <input type="email" matInput formControlName="emailFormControl" placeholder="Ex. pat@example.com">
+                    <mat-error class="label" *ngIf="loginform.controls['emailFormControl']?.hasError('email') && !loginform.controls['emailFormControl']?.hasError('required')">
                         Please enter a valid email address
                     </mat-error>
-                    <mat-error class="label" *ngIf="emailFormControl.hasError('required')">
+                    <mat-error class="label" *ngIf="loginform.controls['emailFormControl']?.hasError('required')">
                         Email is required
                     </mat-error>
                 </mat-form-field>
 
-                <mat-form-field appearance="fill" class="example-full-width">
+                <mat-form-field class="example-full-width">
                     <mat-label class="label">Enter your password</mat-label>
-                    <input matInput [type]="hide ? 'password' : 'text'" [formControl]="passwordFormControl">
+                    <input matInput [type]="hide ? 'password' : 'text'" formControlName="passwordFormControl" (input)="onPasswordFill()">
                     <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
                         [attr.aria-pressed]="hide">
                         <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                     </button>
-                    <mat-error class="label" *ngIf="passwordFormControl.hasError('required')">
+                    <mat-error class="label" *ngIf="loginform.controls['passwordFormControl']?.hasError('required')">
                         Password is required
                     </mat-error>
-                    <mat-error class="label" *ngIf="passwordFormControl.errors?.['pattern']">
+                    <!-- <mat-error class="label" *ngIf="loginform.controls['passwordFormControl']?.errors?.['pattern']">
                         Password should have 1 uppercase, 1 lowercase, 1 number, minimum 8 characters and maximum 20
                         characters
-                    </mat-error>
+                    </mat-error> -->
                 </mat-form-field>
+                <div *ngIf="show" class="error">
+                    <span>Password should have 1 uppercase</span>
+                    <span>Password should have 1 lowercase</span>
+                    <span>Password should have 1 number</span>
+                    <span>Minimum 8 and maximum 15 characters</span>
+                    <span>No WhiteSpace</span>
+                </div>
                 <div class="button">
-                    <button mat-raised-button>LOGIN</button>
+                    <button mat-raised-button  [disabled]="!loginform.valid">LOGIN</button>
                 </div>
             </form>
             <div class="user">

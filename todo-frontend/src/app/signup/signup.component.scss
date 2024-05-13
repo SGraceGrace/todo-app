@@ -83,3 +83,11 @@ h2 {
   width: 45%;
   margin-left: 10px;
 }
+
+button[mat-raised-button]:disabled {
+  opacity: 0.3;
+}
+
+input[disabled] {
+  cursor: not-allowed;
+}

@@ -4,7 +4,7 @@
         <div class="content">
             <h1>Welcome to our Todo List app!!!</h1>
             <h2>Explore our website’s powerful Todo features.
-                Your productivity journey begins here! 💪</h2>
+                Your productivity journey begins here!</h2>
             <form class="example-form" [formGroup]="signupform" (ngSubmit)="onSignup()">
 
                 <mat-form-field class="example-full-width">
@@ -74,7 +74,7 @@
                 </mat-form-field>
 
                 <div class="button">
-                    <button type="submit" [disabled]="signupform.invalid" mat-raised-button>SIGN UP</button>
+                    <button type="submit" [disabled]="!signupform.valid" mat-raised-button>SIGN UP</button>
                 </div>
             </form>
             <div class="user">

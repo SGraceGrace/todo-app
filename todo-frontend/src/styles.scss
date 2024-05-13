@@ -12,3 +12,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .mat-mdc-form-field-focus-overlay {
     background-color: transparent;
 }
+
+.mat-mdc-raised-button[disabled], .mdc-button:disabled {
+  cursor: not-allowed !important;
+  pointer-events: visible !important
+}
