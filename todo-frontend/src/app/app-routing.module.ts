@@ -16,6 +16,10 @@ const routes: Routes = [
   {
     path: 'signup',
     component: SignupComponent
+  },
+  {
+    path: 'user',
+    loadChildren: () => import('./user/user.module').then(module => module.UserModule)
   }
 ];
 

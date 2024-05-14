@@ -7,7 +7,7 @@
             <form class="example-form" [formGroup]="loginform" (ngSubmit)=onLogin()>
                 <mat-form-field class="example-full-width">
                     <mat-label class="label">Email</mat-label>
-                    <input type="email" matInput formControlName="emailFormControl" placeholder="Ex. pat@example.com">
+                    <input type="email" matInput name="email" formControlName="emailFormControl" placeholder="Ex. pat@example.com">
                     <mat-error class="label" *ngIf="loginform.controls['emailFormControl']?.hasError('email') && !loginform.controls['emailFormControl']?.hasError('required')">
                         Please enter a valid email address
                     </mat-error>
@@ -18,7 +18,7 @@
 
                 <mat-form-field class="example-full-width">
                     <mat-label class="label">Enter your password</mat-label>
-                    <input matInput [type]="hide ? 'password' : 'text'" formControlName="passwordFormControl" (input)="onPasswordFill()">
+                    <input matInput [type]="hide ? 'password' : 'text'" name="password" formControlName="passwordFormControl" (input)="onPasswordFill()">
                     <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
                         [attr.aria-pressed]="hide">
                         <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
@@ -26,17 +26,33 @@
                     <mat-error class="label" *ngIf="loginform.controls['passwordFormControl']?.hasError('required')">
                         Password is required
                     </mat-error>
-                    <!-- <mat-error class="label" *ngIf="loginform.controls['passwordFormControl']?.errors?.['pattern']">
-                        Password should have 1 uppercase, 1 lowercase, 1 number, minimum 8 characters and maximum 20
-                        characters
-                    </mat-error> -->
                 </mat-form-field>
-                <div *ngIf="show" class="error">
-                    <span>Password should have 1 uppercase</span>
-                    <span>Password should have 1 lowercase</span>
-                    <span>Password should have 1 number</span>
-                    <span>Minimum 8 and maximum 15 characters</span>
-                    <span>No WhiteSpace</span>
+                <div *ngIf="show" class="pass-div">
+                    <span>
+                        <i class="fa-solid fa-check" *ngIf="cap" id="right"></i>
+                        <i class="fa-solid fa-x" *ngIf="!cap"  id="error"></i>
+                        Password should have 1 uppercase
+                    </span>
+                    <span>
+                        <i class="fa-solid fa-check" *ngIf="small" id="right"></i>
+                        <i class="fa-solid fa-x" *ngIf="!small" id="error"></i>
+                        Password should have 1 lowercase
+                    </span>
+                    <span>
+                        <i class="fa-solid fa-check" *ngIf="num" id="right"></i>
+                        <i class="fa-solid fa-x" *ngIf="!num" id="error"></i>
+                        Password should have 1 number
+                    </span>
+                    <span>
+                        <i class="fa-solid fa-check" *ngIf="len" id="right"></i>
+                        <i class="fa-solid fa-x" *ngIf="!len" id="error"></i>
+                        Minimum 8 and maximum 15 characters
+                    </span>
+                    <span>
+                        <i class="fa-solid fa-check" *ngIf="space" id="right"></i>
+                        <i class="fa-solid fa-x" *ngIf="!space" id="error"></i>
+                        No WhiteSpace
+                    </span>
                 </div>
                 <div class="button">
                     <button mat-raised-button  [disabled]="!loginform.valid">LOGIN</button>
